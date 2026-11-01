@@ -1,0 +1,85 @@
+CICD AI - Cross-Instruction Conflict Detector
+How to open the application on your laptop
+=============================================
+
+You need only ONE thing installed: Python 3.11 or newer.
+(No other software is needed. The website is already built.)
+
+
+STEP 1 - Install Python (one time only)
+---------------------------------------
+1. Go to https://www.python.org/downloads/ and download Python (3.11 or newer).
+2. Run the installer.
+   WINDOWS: on the first screen, TICK the box "Add python.exe to PATH",
+            then click "Install Now".
+3. If Python is already installed, skip this step.
+
+
+STEP 2 - Unzip the folder
+-------------------------
+1. Right-click the zip file -> "Extract All..." -> Extract.
+2. Put the extracted folder somewhere simple, e.g. Desktop or Documents.
+   (Avoid running it from inside the zip, and preferably not inside a
+    OneDrive/Dropbox-synced folder.)
+
+
+STEP 3 - Start the app
+----------------------
+WINDOWS: double-click  START-WINDOWS.bat
+         (If Windows shows "Windows protected your PC", click
+          "More info" -> "Run anyway".)
+
+MAC:     double-click  START-MAC.command
+         (If macOS blocks it: right-click the file -> Open -> Open.
+          If it still won't run, open Terminal, type  bash  and a space,
+          drag the file into the Terminal window, press Enter.)
+
+The FIRST start installs required packages: this takes 2-5 minutes
+and needs an internet connection. Later starts take a few seconds.
+
+A black window opens and stays open - that is the app's server.
+After a few seconds your browser opens automatically at:
+
+        http://localhost:8000
+
+If the browser does not open by itself, open Chrome/Edge/Safari and type
+http://localhost:8000 in the address bar. If the page does not load yet,
+wait 10 seconds and refresh.
+
+
+STEP 4 - Sign in
+----------------
+Click "Explore Demo" (or "Launch Dashboard"), then click one of the demo
+accounts to fill in the form, and click "Sign in":
+
+  Administrator : admin@cicd.demo      / Admin#2026demo
+  Clinician     : clinician@cicd.demo  / Clinician#2026demo
+  Reviewer      : reviewer@cicd.demo   / Reviewer#2026demo
+
+A suggested demo walkthrough is in the Project Handover Guide.
+
+
+STOPPING AND RESTARTING
+-----------------------
+- To stop:    close the black window.
+- To restart: double-click the START file again.
+- Your data (cases, reviews, test results) is kept between restarts.
+- To reset everything to the original demo data: stop the app, delete the
+  file  backend\cicd.db , then start again.
+
+
+TROUBLESHOOTING
+---------------
+"Python is not installed"      -> do Step 1 (remember the PATH tick box).
+"Package installation failed"  -> check the internet connection, run again.
+Page says "can't be reached"   -> the black window must stay open; wait a
+                                  few seconds and refresh.
+"Port 8000 is already in use" / address already in use
+                               -> the app is already running in another
+                                  window; close the extra one.
+
+
+IMPORTANT
+---------
+This is a research prototype using synthetic (fictional) patient data.
+It is not a medical device and must not be used with real patient data.

@@ -1,0 +1,122 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Instrument Serif', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --color-primary: #4169f5;
+  --color-primary-600: #2f55e0;
+  --color-primary-50: #eef2ff;
+  --color-navy: #111a38;
+  --color-navy-800: #1b2550;
+  --color-sky: #76c8ff;
+  --color-cyan: #49d9e8;
+  --color-lavender: #a99bff;
+  --color-canvas: #f4f7ff;
+  --color-ink: #17213b;
+  --color-ink-2: #4a5677;
+  --color-ink-3: #7b86a3;
+  --color-line: #e3e8f5;
+  --color-line-2: #d3dbef;
+  --color-mint: #12a873;
+  --color-mint-50: #e7f8f1;
+  --color-amber: #c27c00;
+  --color-amber-50: #fff5e0;
+  --color-coral: #e0603f;
+  --color-coral-50: #fdeee9;
+  --color-danger: #d03b3b;
+  --color-danger-50: #fdecec;
+
+  --shadow-card: 0 1px 2px rgba(17, 26, 56, 0.04), 0 8px 24px -12px rgba(17, 26, 56, 0.12);
+  --shadow-lift: 0 2px 4px rgba(17, 26, 56, 0.05), 0 18px 40px -16px rgba(41, 72, 190, 0.28);
+  --radius-card: 20px;
+}
+
+@layer base {
+  html { -webkit-font-smoothing: antialiased; }
+  body {
+    @apply bg-canvas text-ink font-sans;
+    font-feature-settings: 'ss01', 'cv11';
+  }
+  ::selection { background: #c9d6ff; }
+  :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 2px; border-radius: 6px; }
+  h1, h2, h3 { letter-spacing: -0.01em; }
+}
+
+@layer components {
+  .card {
+    @apply rounded-[var(--radius-card)] border border-line bg-white;
+    box-shadow: var(--shadow-card);
+  }
+  .card-hover { transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease; }
+  .card-hover:hover { box-shadow: var(--shadow-lift); transform: translateY(-2px); border-color: var(--color-line-2); }
+  .glass {
+    background: linear-gradient(135deg, rgba(255,255,255,.72), rgba(255,255,255,.48));
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border: 1px solid rgba(255,255,255,.65);
+  }
+  .display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.015em; }
+  .label-xs { @apply text-[11px] font-semibold uppercase tracking-[0.08em] text-ink-3; }
+  .num { font-variant-numeric: tabular-nums; }
+  .hero-sky {
+    background:
+      radial-gradient(1200px 500px at 85% -10%, rgba(169,155,255,.55), transparent 60%),
+      radial-gradient(900px 500px at 10% 0%, rgba(118,200,255,.55), transparent 60%),
+      linear-gradient(180deg, #5f86e6 0%, #86a7ef 45%, #c8d7fa 80%, #f4f7ff 100%);
+  }
+  .dot-grid {
+    background-image: radial-gradient(rgba(255,255,255,.35) 1px, transparent 1.2px);
+    background-size: 18px 18px;
+  }
+  .hatch {
+    background-image: repeating-linear-gradient(45deg, rgba(23,33,59,.18) 0 2px, transparent 2px 6px);
+  }
+}
+
+/* Animated gradient used on the auth screens */
+.aurora {
+  background: linear-gradient(120deg, #2445c9, #4169f5, #76c8ff, #a99bff, #49d9e8, #4169f5);
+  background-size: 400% 400%;
+  animation: aurora 18s ease infinite;
+}
+@keyframes aurora {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes pulse-ring {
+  0% { transform: scale(.8); opacity: .6; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+.pulse-ring::after {
+  content: ''; position: absolute; inset: 0; border-radius: 9999px;
+  background: currentColor; animation: pulse-ring 1.8s ease-out infinite;
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+.skeleton { position: relative; overflow: hidden; background: #e9eef9; }
+.skeleton::after {
+  content: ''; position: absolute; inset: 0; transform: translateX(-100%);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.7), transparent);
+  animation: shimmer 1.4s infinite;
+}
+@keyframes float-y { 0%,100% { transform: translateY(0) } 50% { transform: translateY(-6px) } }
+.float-y { animation: float-y 6s ease-in-out infinite; }
+
+/* React Flow polish */
+.react-flow__attribution { display: none; }
+.react-flow__controls { box-shadow: var(--shadow-card) !important; border-radius: 12px; overflow: hidden; }
+.react-flow__controls-button { border-bottom: 1px solid var(--color-line) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .aurora { animation: none; }
+}
+
+@media print {
+  body { background: white; }
+  .no-print { display: none !important; }
+  .card { box-shadow: none; border-color: #ccc; }
+  .print-break { break-inside: avoid; }
+}
